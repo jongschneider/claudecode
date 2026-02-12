@@ -11,6 +11,7 @@ tasks/
 plans/
 
 # Session/runtime data
+image-cache/
 session-env/
 shell-snapshots/
 file-history/
