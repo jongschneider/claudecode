@@ -1,0 +1,30 @@
+# Claude Code internal state
+settings.json
+settings.json.bak
+stats-cache.json
+history.jsonl
+
+# Per-project state
+projects/
+todos/
+tasks/
+plans/
+
+# Session/runtime data
+session-env/
+shell-snapshots/
+file-history/
+paste-cache/
+cache/
+debug/
+ide/
+telemetry/
+
+# Plugins (installed, not authored)
+plugins/
+
+# Backups
+*.bak
+
+# Statsig (feature flags)
+statsig/
