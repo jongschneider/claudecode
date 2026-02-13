@@ -22,6 +22,7 @@ git clone git@github.com:jongschneider/claudecode.git ~/.claude
 ```
 ~/.claude/
 ├── CLAUDE.md              # Global rules for all sessions
+├── statusline-script.sh   # Custom status bar script
 ├── agents/                # Custom subagents
 │   ├── code-reviewer.md   #   Read-only code reviewer (bugs, structure, perf)
 │   └── oracle.md          #   Senior engineering advisor (opus, read-only)
@@ -44,6 +45,34 @@ Global rules applied to every session:
 - Never use `rm` — always use `trash`
 - Always use detached tmux sessions, never attach directly
 - No AI attribution in commits
+
+### Status Line
+
+A custom status bar displayed at the bottom of every Claude Code session. Ported from [ALT-F4-LLC/dotfiles.vorpal](https://github.com/ALT-F4-LLC/dotfiles.vorpal).
+
+![statusline](assets/statusline.png)
+
+**Setup:**
+
+1. The script lives at `~/.claude/statusline-script.sh`
+2. Set the `statusLine` setting to point to it (via `claude config set statusLine ~/.claude/statusline-script.sh`, or in `settings.json`)
+
+**Segments displayed:**
+
+| Segment | Description |
+|---------|-------------|
+| Model | Current model name |
+| Agent | Active agent name (if any) |
+| Project | Basename of project directory |
+| Git | Branch name, staged (+N) and modified (~N) file counts |
+| Context | `▓░` progress bar with percentage (green < 70%, yellow 70-89%, red >= 90%) |
+| Cost | Session cost in USD |
+| Duration | Elapsed session time |
+| Lines | Lines added/removed |
+
+**Requirements:** `jq`, `git`
+
+**Note for Nix users:** The script tries GNU `stat -c %Y` before BSD `stat -f %m` for cache file timestamps. If you're on a non-Nix macOS, this still works — the GNU variant fails silently and falls back to BSD.
 
 ### `settings.json`
 
